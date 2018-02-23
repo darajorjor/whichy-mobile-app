@@ -1,0 +1,19 @@
+{
+  "back": "Back",
+  "watch_video": "Watch a Video",
+  "header": {
+    "level": "Level {{level}}",
+    "questions": "Questions {{current}} From {{total}}"
+  },
+  "home": {
+    "imagine": "What if...",
+    "but": "But...",
+    "accept": "Yay!",
+    "deny": "Nooo!"
+  },
+  "menu": {
+    "buy_coin": "Buy Coin!",
+    "write_what_if": "Write Question",
+    "your_profile": "Your Profile"
+  }
+}

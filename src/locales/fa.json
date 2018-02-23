@@ -1,0 +1,19 @@
+{
+  "back": "برگشت",
+  "watch_video": "ویدیو ببین!",
+  "header": {
+    "level": "مرحله {{level}}",
+    "questions": "سوال {{current}} از {{total}}"
+  },
+  "home": {
+    "imagine": "تصور کن اگر...",
+    "but": "اما...",
+    "accept": "قبوله!",
+    "deny": "قبول نیست!"
+  },
+  "menu": {
+    "buy_coin": "افزایش سکه!",
+    "write_what_if": "نوشتن تصور",
+    "your_profile": "پروفایل شما"
+  }
+}
