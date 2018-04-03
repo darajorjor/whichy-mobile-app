@@ -3,22 +3,28 @@ import {
   View,
   StyleSheet,
 } from 'react-native'
+import Pressable from 'src/common/Pressable'
 import Jext from 'src/common/Jext'
 
-const Parallelogram = ({ label, labelStyle, style, wrapperStyle }) => (
-  <View style={[styles.wrapper, style]}>
-    <View style={styles.innerWrapper}>
-      <Jext bold style={labelStyle}>{ label }</Jext>
-    </View>
-  </View>
-)
+const Parallelogram = ({ label, labelStyle, onPress, pressed, style }) => {
+  let Wrapper = View
+  if (onPress) {
+    Wrapper = Pressable
+  }
 
+  return (
+    <Wrapper pressed={pressed} onPress={onPress} style={[styles.wrapper, style]} transforms={[{
+      skewX: '-10deg'
+    }]}>
+      <View style={styles.innerWrapper}>
+        <Jext bold style={labelStyle}>{ label }</Jext>
+      </View>
+    </Wrapper>
+  )
+}
 const styles = StyleSheet.create({
   wrapper: {
     borderRadius: 5,
-    transform: [{
-      skewX: '-10deg'
-    }],
   },
   innerWrapper: {
     flex: 1,

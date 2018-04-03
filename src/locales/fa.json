@@ -1,19 +1,54 @@
 {
   "back": "برگشت",
   "watch_video": "ویدیو ببین!",
+  "imagine": "تصور کن اگه...",
+  "but": "اما...",
+  "coin": "سکه",
+  "rate": "امتیاز دهید!",
+  "or": "یا",
+  "comments": "نظر‌ها",
   "header": {
     "level": "مرحله {{level}}",
     "questions": "سوال {{current}} از {{total}}"
   },
   "home": {
-    "imagine": "تصور کن اگر...",
-    "but": "اما...",
-    "accept": "قبوله!",
-    "deny": "قبول نیست!"
+    "accept": "اوکی!",
+    "deny": "نه!",
+    "share": "اشتراک‌گذاری!"
   },
   "menu": {
+    "store": "فروشگاه",
     "buy_coin": "افزایش سکه!",
-    "write_what_if": "نوشتن تصور",
-    "your_profile": "پروفایل شما"
-  }
+    "write_what_if": "نوشتن ویچ",
+    "login": "ورود",
+    "login_or_register": "ورود یا عضویت",
+    "login_with_google": "Sign in With Google",
+    "enter_email": "ایمیل خود را وارد کنید",
+    "other_colors": "رنگ های دیگر",
+    "games": "بازی ها",
+    "active_game": "بازی فعال شما"
+  },
+  "new_which": {
+    "placeholder": "برای نوشتن اینجا را تپ کنید...",
+    "write_which_hint": "ویچ بساز و آمارشو بگیر!",
+    "submit": "ثبت ویچ!"
+  },
+  "offline_message": {
+    "whatif": "هیچ سوال دیگه‌ای نبود جواب بدی",
+    "but": "میتونستی بعدا بیای و ببینی کلی سوال جدید اضافه شده!"
+  },
+  "coins_modal": {
+    "watch_video": "ویدیو ببینید",
+    "review_whichy": "نظرتان را در مورد ویچی بنویسید",
+    "share_instagram": "اشتراک گذاری در اینستاگرام",
+    "tweet_whichy": "در مورد ویچی توییت کنید",
+    "buy_100": "جادوی کودوس",
+    "buy_500": "جادوی تالاموس",
+    "buy_1000": "جادوی اینوراپوتا",
+    "buy_10000": "جادوی جیزینگو"
+  },
+  "store": {
+    "basic": "استارتر"
+  },
+  "coming_soon": "به زودی..."
 }

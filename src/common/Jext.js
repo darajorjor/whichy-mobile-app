@@ -3,21 +3,26 @@ import {
   Text,
   StyleSheet,
   Dimensions,
+  Platform,
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   wrapper: {
-    fontFamily: 'IRANYekanFaNum',
+    fontFamily: Platform.select({
+      ios: 'IRANYekanFaNum',
+      android: 'IRANYekanFaNum',
+    }),
     backgroundColor: 'transparent',
     // fontSize: 14,
     color: '#424242',
     textAlign: 'right',
-    maxWidth: width - 32
+    maxWidth: width - 32,
+    // top: -1,
   },
   onPress: {
-    color: 'red',
+    // color: 'red',
   }
 });
 
@@ -33,7 +38,7 @@ const Jext = ({ style, children, numberOfLines, onPress, autoAdjust, f, c, bold 
       {
         fontSize: f ? f : 14,
         color: c ? c : '#424242',
-        fontWeight: bold ? 'bold': undefined
+        fontWeight: bold ? 'bold': undefined,
       },
       style,
     ]}

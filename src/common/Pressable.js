@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import {
   TouchableOpacity,
   StyleSheet,
+  View,
+  Platform,
 } from 'react-native'
 
 const options = {
@@ -17,22 +19,32 @@ export default class Pressable extends PureComponent {
   handlePressOut = () => this.setState({ shadowVisible: true })
 
   render() {
-    const { children, style, ...otherProps } = this.props
-    const { shadowVisible } = this.state
+    const { children, style, pressed, disabled, onPress, transforms = [], ...otherProps } = this.props
+    let { shadowVisible } = this.state
+
+    if (pressed) {
+      shadowVisible = false
+    }
 
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-        onPressIn={this.handlePressIn}
-        onPressOut={this.handlePressOut}
-        {...otherProps}
-        style={[
-          shadowVisible ? styles.boxShadow : styles.poppedUp,
-          style
-        ]}
-      >
-        { children }
-      </TouchableOpacity>
+      <View style={[
+        shadowVisible ? styles.boxShadow : styles.poppedUp,
+        style,
+        { transform: shadowVisible ? transforms : [...transforms, { translateY: 2 }] },
+      ]}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPressIn={disabled ? null : this.handlePressIn}
+          onPressOut={disabled ? null : this.handlePressOut}
+          onPress={disabled ? null : onPress}
+          {...otherProps}
+          style={[
+            { flex: 1, },
+          ]}
+        >
+          {children}
+        </TouchableOpacity>
+      </View>
     )
   }
 }
@@ -46,10 +58,11 @@ const styles = StyleSheet.create({
       height: 3,
       width: 0
     },
+    borderBottomWidth: Platform.select({ android: 3 }),
+    borderBottomColor: Platform.select({ android: options.shadowColor }),
   },
   poppedUp: {
-    transform: [{
-      translateY: 2
-    }],
+    borderBottomWidth: Platform.select({ android: 3 }),
+    borderBottomColor: Platform.select({ android: 'transparent' }),
   },
 })
