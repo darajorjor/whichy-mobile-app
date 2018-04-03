@@ -3,17 +3,13 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  Platform,
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   wrapper: {
-    fontFamily: Platform.select({
-      ios: 'IRANYekanFaNum',
-      android: 'IRANYekanFaNum',
-    }),
+    fontFamily: 'IRANYekanFaNum',
     backgroundColor: 'transparent',
     // fontSize: 14,
     color: '#424242',

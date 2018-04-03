@@ -22,6 +22,7 @@
     "react-native-linear-gradient": "^2.4.0",
     "react-native-safari-view": "^2.1.0",
     "react-native-scrollable-tab-view": "^0.8.0",
+    "react-native-tab-view": "^0.0.77",
     "react-native-tapsell": "^2.15.10",
     "react-navigation": "^1.1.2",
     "react-redux": "^5.0.7",
