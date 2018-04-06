@@ -34,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
                     new MainReactPackage(),
             new FabricPackage(),
             new ReactNativeOneSignalPackage(),
-            new CodePush("6052e660-1c96-44ea-861a-a853e3aa9bd1", getApplicationContext(), BuildConfig.DEBUG),
+            new CodePush(BuildConfig.CODEPUSH_KEY, getApplicationContext(), BuildConfig.DEBUG),
                     new TapsellReactNativePackage(),
                     new RNDeviceInfo(),
                     new LinearGradientPackage(),
