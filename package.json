@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "deploy-release-ios": "./send-sourcemaps-to-bugsnag.sh ios '^2.2.2' 1.0.0-b24",
+    "deploy-release-android": "./send-sourcemaps-to-bugsnag.sh android '^2.2.2' 1.0.0-b24",
+    "deploy-staging-ios": "code-push release-react whichy-ios ios --mandatory --noDuplicateReleaseError --outputDir build",
+    "deploy-staging-android": "code-push release-react whichy-android android --mandatory --noDuplicateReleaseError --outputDir build",
     "generate-apk": "cd android && ./gradlew assembleRelease && cd ..",
-    "deploy-android": "code-push release-react whichy-android android --mandatory --noDuplicateReleaseError --outputDir build",
-    "deploy-ios": "code-push release-react whichy-ios ios --mandatory --noDuplicateReleaseError --outputDir build",
-    "test": "jest"
+    "generate-apk:staging": "cd android && ./gradlew assembleReleaseStaging && cd .."
   },
   "dependencies": {
     "@types/react": "^16.0.38",
