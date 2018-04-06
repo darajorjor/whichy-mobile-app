@@ -2,9 +2,12 @@ package com.whatif;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
+import com.smixx.fabric.FabricPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.microsoft.codepush.react.CodePush;
+import io.fabric.sdk.android.Fabric;
 import ir.tapsell.reactnativesdk.TapsellReactNativePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -29,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new FabricPackage(),
             new ReactNativeOneSignalPackage(),
             new CodePush("6052e660-1c96-44ea-861a-a853e3aa9bd1", getApplicationContext(), BuildConfig.DEBUG),
                     new TapsellReactNativePackage(),
@@ -52,6 +56,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         SoLoader.init(this, /* native exopackage */ false);
     }
 }

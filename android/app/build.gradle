@@ -93,6 +93,21 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        // The Fabric Gradle plugin uses an open ended version to react
+        // quickly to Android tooling updates
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'io.fabric'
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -106,8 +121,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: "40384a2b-3fc7-4b57-ac70-9941fe7f15b0",
-                                        onesignal_google_project_number: "47146691342"]
+        manifestPlaceholders = [onesignal_app_id               : "40384a2b-3fc7-4b57-ac70-9941fe7f15b0",
+                                onesignal_google_project_number: "47146691342"]
     }
     signingConfigs {
         release {
@@ -170,6 +185,10 @@ android {
 }
 
 dependencies {
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+    compile project(':react-native-fabric')
     compile project(':react-native-onesignal')
     compile project(':react-native-code-push')
     compile project(':react-native-tapsell')
