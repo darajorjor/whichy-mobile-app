@@ -106,6 +106,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [onesignal_app_id: "40384a2b-3fc7-4b57-ac70-9941fe7f15b0",
+                                        onesignal_google_project_number: "47146691342"]
     }
     signingConfigs {
         release {
@@ -168,6 +170,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-onesignal')
     compile project(':react-native-code-push')
     compile project(':react-native-tapsell')
     compile project(':react-native-device-info')

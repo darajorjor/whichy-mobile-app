@@ -3,6 +3,7 @@ package com.whatif;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.microsoft.codepush.react.CodePush;
 import ir.tapsell.reactnativesdk.TapsellReactNativePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new ReactNativeOneSignalPackage(),
             new CodePush("6052e660-1c96-44ea-861a-a853e3aa9bd1", getApplicationContext(), BuildConfig.DEBUG),
                     new TapsellReactNativePackage(),
                     new RNDeviceInfo(),
