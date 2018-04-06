@@ -14,6 +14,7 @@ import Tapsell, { BannerAd, BANNER_320x50 } from 'react-native-tapsell'
 import { black, darkOrange } from 'src/theme'
 import codePush from 'react-native-code-push'
 import toast from 'src/utils/toast'
+import { Crashlytics } from 'react-native-fabric'
 
 import { store, persistor } from './redux/store'
 import { initVideoAd } from './redux/Main.reducer'
@@ -32,8 +33,16 @@ Tapsell.setDebugMode(__DEV__)
 Tapsell.initialize(config.tapsellKey)
 store.dispatch(initVideoAd())
 
-@codePush
 export default class App extends React.Component {
+  componentDidMount() {
+    try {
+      codePush.sync()
+    } catch (e) {
+      Crashlytics.recordError(e)
+      toast(e.message)
+    }
+  }
+
   render() {
     return (
       <Provider store={store}>
