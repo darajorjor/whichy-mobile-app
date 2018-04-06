@@ -70,7 +70,6 @@ export default class Menu extends PureComponent {
   }
 
   handleOpenURL = ({ url }) => {
-    debugger
     // Extract stringified user string out of the URL
     const [, user_string] = url.match(/user=([^#]+)/)
     const { setToStore } = this.props

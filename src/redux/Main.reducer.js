@@ -83,13 +83,13 @@ export function setToStore(key, data) {
   }
 }
 
+let listenerSet = false
+
 export function initVideoAd() {
   return (dispatch, getState, api) => {
     function requestAd() {
       return Tapsell.requestAd(config.adZones.video, true,
         (zoneId, adId) => {
-          // onAdAvailable
-          // alert("ad avaiable")
           dispatch({
             type: VIDEO_AD_RECEIVED,
             data: adId,
@@ -97,15 +97,15 @@ export function initVideoAd() {
         },
         zoneId => {
           // onNoAdAvailable
-          alert('no ad avaiable')
+          console.info('no ad avaiable')
         },
         zoneId => {
           // onNoNetwork
-          alert('no network')
+          console.info('no network')
         },
         (zoneId, error) => {
           // onError
-          alert('error: ' + error)
+          console.info('error: ' + error)
         },
         (zoneId, adId) => {
           // onExpiring
@@ -115,16 +115,20 @@ export function initVideoAd() {
         })
     }
 
-    Tapsell.setRewardListener((zoneId, adId, completed, rewarded) => {
-      if (rewarded) {
-        api.post('games/watch-ad', { data: { adId } })
-          .then(({ data: { balance } }) => {
-            dispatch(setToStore('balance', balance))
-          })
-      }
+    if (!listenerSet) {
+      Tapsell.setRewardListener((zoneId, adId, completed, rewarded) => {
+        if (rewarded && completed) {
+          api.post('games/watch-ad', { data: { adId } })
+            .then(({ data: { balance } }) => {
+              dispatch(setToStore('balance', balance))
+            })
+        }
 
-      return requestAd()
-    })
+        return requestAd()
+      })
+
+      listenerSet = true
+    }
 
     return requestAd()
   }

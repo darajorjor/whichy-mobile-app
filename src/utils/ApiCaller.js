@@ -46,29 +46,18 @@ function fetchCreator(method) {
     fetchOptions.method = method
     fetchOptions.url = formatUrl(url)
 
-    console.log('REQUEST =======>>>>>>')
     console.log(formatUrl(url), fetchOptions)
     return axios(fetchOptions)
-      .then((response) => {
-        console.log(`${formatUrl(url)} RESPONSE =========>>>`, response.data)
-        return response.data
-      })
+      .then((response) => response.data)
       .catch(e => {
-        console.log(`${formatUrl(url)} RESPONSE ERROR =========>>>`, e)
         if (e.response && e.response.status === 401) {
           AsyncStorage.removeItem(storageConstants.SESSION)
         }
 
         if (e.response && e.response.data && e.response.data.message) {
-          toast({
-            title: e.response.data.message,
-            status: 'error',
-          })
+          toast(e.response.data.message)
         } else {
-          toast({
-            title: e.response ? e.response.statusText : 'Something went wrong',
-            status: 'error',
-          })
+          toast(e.response ? e.response.statusText : __t('something_went_wrong'))
         }
 
         throw e

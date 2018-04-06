@@ -14,8 +14,8 @@ const options = {
   coins: 5,
 }
 
-const CommentsButton = () => (
-  <Pressable style={styles.wrapper}>
+const CommentsButton = ({ onPress }) => (
+  <Pressable onPress={onPress} style={styles.wrapper}>
     <View style={styles.innerWrapper}>
       <Jext c={white} bold>{ __t('comments') }</Jext>
     </View>

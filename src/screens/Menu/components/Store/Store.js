@@ -91,11 +91,13 @@ export default class Store extends PureComponent {
     return (
       <Animatable.View
         transition='bottom'
+        duration={800}
+        easing='ease-out-expo'
         style={[
           styles.wrapper,
           styles.boxShadow,
           {
-            bottom: open ? -150 : -height * 0.65,
+            bottom: open ? -140 : -height * 0.65,
           },
         ]}
       >

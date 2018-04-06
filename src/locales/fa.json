@@ -31,7 +31,8 @@
   "new_which": {
     "placeholder": "برای نوشتن اینجا را تپ کنید...",
     "write_which_hint": "ویچ بساز و آمارشو بگیر!",
-    "submit": "ثبت ویچ!"
+    "submit": "ثبت ویچ!",
+    "submit_success": "ویچ با موفقیت ثبت شد"
   },
   "offline_message": {
     "whatif": "هیچ سوال دیگه‌ای نبود جواب بدی",
@@ -50,5 +51,6 @@
   "store": {
     "basic": "استارتر"
   },
-  "coming_soon": "به زودی..."
+  "coming_soon": "به زودی...",
+  "something_went_wrong": "اوپس، یچیزی خراب شد"
 }

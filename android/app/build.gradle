@@ -73,7 +73,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+        entryFile: "index.js"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -108,15 +108,15 @@ android {
         }
     }
     signingConfigs {
-            release {
-                if (project.hasProperty('WHICHY_RELEASE_STORE_FILE')) {
-                    storeFile file(WHICHY_RELEASE_STORE_FILE)
-                    storePassword WHICHY_RELEASE_STORE_PASSWORD
-                    keyAlias WHICHY_RELEASE_KEY_ALIAS
-                    keyPassword WHICHY_RELEASE_KEY_PASSWORD
-                }
+        release {
+            if (project.hasProperty('WHICHY_RELEASE_STORE_FILE')) {
+                storeFile file(WHICHY_RELEASE_STORE_FILE)
+                storePassword WHICHY_RELEASE_STORE_PASSWORD
+                keyAlias WHICHY_RELEASE_KEY_ALIAS
+                keyPassword WHICHY_RELEASE_KEY_PASSWORD
             }
         }
+    }
     splits {
         abi {
             reset()
@@ -126,18 +126,38 @@ android {
         }
     }
     buildTypes {
-            release {
-                minifyEnabled enableProguardInReleaseBuilds
-                proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-                signingConfig signingConfigs.release
-            }
+
+        debug {
+            manifestPlaceholders = [excludeSystemAlertWindowPermission: "true"]
+            applicationIdSuffix '.dev'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            // Note: CodePush updates should not be tested in Debug mode as they are overriden by the RN packager. However, because CodePush checks for updates in all modes, we must supply a key.
+            buildConfigField "String", "CODEPUSH_KEY", '""'
         }
+
+        releaseStaging {
+            applicationIdSuffix '.rn.staging'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            buildConfigField "String", "CODEPUSH_KEY", '"CSXMyv3rGEQNZKuliQjnHaZ8eq2G1cf1cabd-eef1-47c5-be27-2be08de1f373"'
+            signingConfig signingConfigs.release
+        }
+
+        release {
+            manifestPlaceholders = [excludeSystemAlertWindowPermission: "true"]
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            buildConfigField "String", "CODEPUSH_KEY", '"YvrIg3eONKpR2hwaZPDdwYp3b5Ti1cf1cabd-eef1-47c5-be27-2be08de1f373"'
+            signingConfig signingConfigs.release
+        }
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =

@@ -6,4 +6,7 @@ export default {
     bottomBanner: '5abb3e09bb1c6d00011589f4',
     video: '5aba1f0db601ec00019f5e25',
   },
+  values: {
+    newWhichPrice: 0,
+  },
 }

@@ -38,7 +38,7 @@ export default class CoinsModal extends PureComponent {
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'خرید سکه' },
+      { key: 'first', title: 'سکه رایگان' },
       { key: 'second', title: 'خرید سکه' },
     ],
   }

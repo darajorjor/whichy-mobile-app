@@ -18,6 +18,7 @@ import AppHeader from 'src/common/AppHeader'
 import api from 'src/utils/ApiHOC'
 import { setToStore } from 'src/redux/Main.reducer'
 import { connect } from 'react-redux'
+import config from 'src/config'
 import HelpIcon from './assets/help_filled.png'
 
 const { height } = Dimensions.get('window')
@@ -85,9 +86,9 @@ export default class NewWhich extends PureComponent {
         <KeyboardAvoidingView
           behavior='position'
           keyboardVerticalOffset={60}
-          style={{ flex: 1 }}
+          style={{ position: 'absolute', top: 64, left: 16, right: 16, elevation: 99999, zIndex: 9999999 }}
         >
-          { card }
+          {card}
         </KeyboardAvoidingView>
       )
     }
@@ -98,6 +99,10 @@ export default class NewWhich extends PureComponent {
   onSubmit = () => {
     const { navigation, data: { send }, setToStore } = this.props
     const { butField, whatifField } = this.refs
+
+    if (!butField._lastNativeText || !whatifField._lastNativeText) {
+      return null
+    }
 
     // send
     send({
@@ -111,6 +116,7 @@ export default class NewWhich extends PureComponent {
         butField.clear()
         whatifField.clear()
         navigation.pop()
+        toast(__t('new_which.submit_success'))
       })
   }
 
@@ -120,6 +126,7 @@ export default class NewWhich extends PureComponent {
     return (
       <View style={styles.wrapper}>
         <TouchableOpacity
+          onPress={() => toast(__t('coming_soon'))}
           style={styles.hint}
         >
           <Image
@@ -132,7 +139,7 @@ export default class NewWhich extends PureComponent {
               top: 8
             }}
           />
-          <Jext f={20} style={{ fontWeight: 'bold', top: -5 }}>{ __t('new_which.write_which_hint') }</Jext>
+          <Jext f={20} style={{ fontWeight: 'bold', top: -5 }}>{__t('new_which.write_which_hint')}</Jext>
         </TouchableOpacity>
         <Card
           backgroundColor={white}
@@ -145,9 +152,9 @@ export default class NewWhich extends PureComponent {
               color: black,
             },
           })}
-          style={styles.card}
+          style={[styles.card, { zIndex: -1, elevation: 0 }]}
         />
-        { this.renderBut() }
+        {this.renderBut()}
 
         <Button
           title={<View style={{ flexDirection: 'row', alignItems: 'center', bottom: 5 }}>
@@ -160,10 +167,10 @@ export default class NewWhich extends PureComponent {
                 height: 30,
               }}
             />
-            <Jext c={white} style={{ top: 5, marginRight: 5 }}>90 { __t('coin') }</Jext>
-            <Jext f={24} c={white}>{ __t('new_which.submit') }</Jext>
+            <Jext c={white} style={{ top: 5, marginRight: 5 }}>{config.values.newWhichPrice} {__t('coin')}</Jext>
+            <Jext f={24} c={white}>{__t('new_which.submit')}</Jext>
           </View>}
-          disabled={balance < 90}
+          disabled={balance < config.values.newWhichPrice}
           onPress={this.onSubmit}
           gradientColors={[lightGreen, lightGreen]}
           style={styles.button}

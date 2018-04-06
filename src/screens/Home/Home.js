@@ -10,7 +10,6 @@ import {
 import { orange } from 'src/theme'
 import AppHeader from 'src/common/AppHeader'
 import Card from 'src/common/Card'
-// import BG from 'src/common/BG'
 import Button from 'src/common/Button'
 import { white, black, gradients } from 'src/theme'
 import api from 'src/utils/ApiHOC'
@@ -19,10 +18,12 @@ import storageConstants from 'src/constants/storage.constant'
 import Jext from 'src/common/Jext'
 import _ from 'lodash'
 import { store } from 'src/redux/store'
+import { setToStore } from 'src/redux/Main.reducer'
+
 import homeService from './Home.service'
 import WatchVideoButton from './components/WatchVideoButton'
 import CommentsButton from './components/CommentsButton'
-import { setToStore } from 'src/redux/Main.reducer'
+import CommentsModal from './components/CommentsModal'
 
 const { width } = Dimensions.get('window')
 
@@ -74,7 +75,7 @@ export default class Home extends PureComponent {
       >
         {
           _.get(navigation, 'state.params.activate')
-            ? <CommentsButton />
+            ? <CommentsButton onPress={_.get(navigation, 'state.params.onCommentsPress')}/>
             : <WatchVideoButton />
         }
       </AppHeader>
@@ -92,6 +93,7 @@ export default class Home extends PureComponent {
      * the same question
      * */
     showingResult: false,
+    commentsModalVisible: false,
   }
 
   async componentDidMount() {
@@ -111,6 +113,7 @@ export default class Home extends PureComponent {
     setParams({
       onLike: () => this.handleRate(true),
       onDislike: () => this.handleRate(false),
+      onCommentsPress: () => this.setState({ commentsModalVisible: true }),
     })
 
     function getGame() {
@@ -123,6 +126,7 @@ export default class Home extends PureComponent {
           })
         })
     }
+
     function getStartup() {
       return startupRefetch()
         .then(({ balance }) => store.dispatch(setToStore('balance', balance)))
@@ -155,7 +159,7 @@ export default class Home extends PureComponent {
     }
   }
 
-  nextCard = () => {
+  nextCard = async (questionId, accept) => {
     const {
       data: {
         mutateStore,
@@ -167,6 +171,10 @@ export default class Home extends PureComponent {
     } = this.props
     const { store } = this.context
     const { questions } = store.getState().ApiHOC.root
+
+    if (questionId) {
+      await this.handleAnswer(questionId, accept)
+    }
 
     this.refs.whatifCard ? this.refs.whatifCard.bounceOutRight() : null
     setTimeout(() => {
@@ -185,6 +193,8 @@ export default class Home extends PureComponent {
           .then(i => {
             setParams({
               level: i.level,
+              currentQuestion: (i.levelQuestions - i.questions.length) + 1,
+              totalQuestions: i.levelQuestions,
             })
           })
       }
@@ -204,6 +214,23 @@ export default class Home extends PureComponent {
     })
   }
 
+  handleAnswer = (questionId) => {
+    const { data: { answer } } = this.props
+    const { showingResult } = this.state
+
+    return answer({
+      params: {
+        questionId,
+      },
+      body: {
+        accept: showingResult === 'accept',
+      },
+    })
+      .catch(e => {
+        if (e !== 'ANSWERED_BEFORE') throw e
+      })
+  }
+
   handleRate(like) {
     const { data: { rate, questions } } = this.props
     const nextQuestion = questions ? questions.questions[0] : null
@@ -220,36 +247,21 @@ export default class Home extends PureComponent {
     })
   }
 
-  handleRespond = (accept, questionId) => () => {
-    if (!questionId) return this.nextCard()
+  handleRespond = (accept, question) => () => {
     const {
-      data: {
-        answer
-      },
       navigation: {
         setParams
       },
     } = this.props
 
-    answer({
-      params: {
-        questionId,
-      },
-      body: {
-        accept,
-      },
+    if (!question) return this.nextCard()
+
+    setParams({
+      activate: true,
     })
-      .then(() => {
-        setParams({
-          activate: true,
-        })
-        this.setState({
-          showingResult: accept ? 'accept' : 'deny',
-        })
-      })
-      .catch(e => {
-        this.nextCard()
-      })
+    this.setState({
+      showingResult: accept ? 'accept' : 'deny',
+    })
   }
 
   calculateButtonWidth = () => {
@@ -282,8 +294,11 @@ export default class Home extends PureComponent {
           justifyContent: 'center',
         }}
       >
-        <Jext f={18} c={white}>{ showingResult === 'accept' ? __t('home.accept') : __t('home.deny') }</Jext>
-        <Jext f={12} c={white}>{question.stats[showingResult === 'accept' ? 'yes' : 'no']}٪ مردم مثل تو فکر میکنن</Jext>
+        <Jext f={18} c={white}>{showingResult === 'accept' ? __t('home.accept') : __t('home.deny')}</Jext>
+        {
+          !!question &&
+          <Jext f={12} c={white}>{question.stats[showingResult === 'accept' ? 'yes' : 'no']}٪ مردم مثل تو فکر میکنن</Jext>
+        }
       </View>
     )
   }
@@ -362,7 +377,7 @@ export default class Home extends PureComponent {
           >
             <Button
               title={showingResult ? this.renderResultsInButton(showingResult, nextQuestion) : __t('home.accept')}
-              onPress={showingResult ? this.nextCard : this.handleRespond(true, nextQuestion ? nextQuestion.id : null)}
+              onPress={showingResult ? () => this.nextCard(nextQuestion ? nextQuestion.id : null) : this.handleRespond(true, nextQuestion ? nextQuestion.id : null)}
               gradientColors={gradients.green}
               style={{
                 flex: 1,
@@ -371,6 +386,11 @@ export default class Home extends PureComponent {
             />
           </Animatable.View>
         </View>
+
+        <CommentsModal
+          visible={this.state.commentsModalVisible}
+          onRequestClose={() => this.setState({ commentsModalVisible: false })}
+        />
       </View>
     )
   }

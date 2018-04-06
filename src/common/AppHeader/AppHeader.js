@@ -142,8 +142,7 @@ const styles = StyleSheet.create({
   },
   coinsWrapper: {
     flexDirection: 'row',
-    marginTop: 10,
-    height: 30,
+    height: 50,
     width: 120,
   },
   coinField: {

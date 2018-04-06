@@ -27,6 +27,7 @@ const options = {
 )
 export default class WatchVideoButton extends PureComponent {
   onPress = () => {
+    console.info(`XXX SHOWING AD ${this.props.videoAdId}`)
     showAd(this.props.videoAdId)
   }
 
