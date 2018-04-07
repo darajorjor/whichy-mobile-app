@@ -29,12 +29,17 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         @Override
+        public String getJSBundleFile() {
+            return CodePush.getJSBundleFile();
+        }
+
+        @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
             new FabricPackage(),
             new ReactNativeOneSignalPackage(),
-            new CodePush(BuildConfig.CODEPUSH_KEY, getApplicationContext(), BuildConfig.DEBUG),
+            new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG),
                     new TapsellReactNativePackage(),
                     new RNDeviceInfo(),
                     new LinearGradientPackage(),
@@ -56,7 +61,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                .debuggable(true)
+                .build();
+        Fabric.with(fabric);
         SoLoader.init(this, /* native exopackage */ false);
     }
 }
