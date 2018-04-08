@@ -61,7 +61,7 @@ export default class CoinsModal extends PureComponent {
   />
 
   _renderScene = SceneMap({
-    first: () => <ScrollView tabLabel='سکه رایگان'>
+    first: (props) => <ScrollView tabLabel='سکه رایگان'>
       {
         !!this.props.videoAdId &&
         <ColorfulItem
@@ -69,7 +69,7 @@ export default class CoinsModal extends PureComponent {
           price={5}
           backgroundColor={blue}
           onPress={() => {
-            props.onRequestClose()
+            this.props.onRequestClose()
             setTimeout(() => {
               showAd(this.props.videoAdId)
             }, 500)

@@ -40,6 +40,7 @@ export default class App extends React.Component {
     } catch (e) {
       Crashlytics.recordError(e)
       toast(e.message)
+      throw e
     }
   }
 
@@ -52,7 +53,7 @@ export default class App extends React.Component {
               backgroundColor={darkOrange}
               // translucent
             />
-            <Navigator uriPrefix='whichy'/>
+            <Navigator uriPrefix='whichy' />
 
             <View
               style={{

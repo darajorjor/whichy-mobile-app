@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18.5,
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: -1,
   },
   card: {
     height: height * 0.23,

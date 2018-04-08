@@ -4051,9 +4051,9 @@ react-native-tab-view@^0.0.77:
   dependencies:
     prop-types "^15.6.0"
 
-react-native-tapsell@^2.16.1:
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/react-native-tapsell/-/react-native-tapsell-2.16.1.tgz#5259451c75e89d244c49068a9e90d505ce89c1b8"
+react-native-tapsell@^2.16.2:
+  version "2.16.2"
+  resolved "https://registry.yarnpkg.com/react-native-tapsell/-/react-native-tapsell-2.16.2.tgz#657dee5bb558548981820858381ecdf504818125"
   dependencies:
     prop-types "^15.5.10"
 

@@ -52,7 +52,7 @@ export default class Pressable extends PureComponent {
 const styles = StyleSheet.create({
   boxShadow: {
     shadowOpacity: 1,
-    shadowRadius: 1,
+    shadowRadius: 0,
     shadowColor: options.shadowColor,
     shadowOffset: {
       height: 3,

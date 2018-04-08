@@ -24,6 +24,9 @@ import homeService from './Home.service'
 import WatchVideoButton from './components/WatchVideoButton'
 import CommentsButton from './components/CommentsButton'
 import CommentsModal from './components/CommentsModal'
+import { connect } from 'react-redux'
+import { showAd } from 'src/utils/ad'
+import config from 'src/config'
 
 const { width } = Dimensions.get('window')
 
@@ -58,6 +61,11 @@ const { width } = Dimensions.get('window')
     instantCall: false,
   },
 })
+@connect(
+  state => ({
+    videoAdId: state.Main.videoAdId,
+  })
+)
 export default class Home extends PureComponent {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: _.get(navigation, 'state.params.headerHidden') ? null : (
@@ -75,7 +83,7 @@ export default class Home extends PureComponent {
       >
         {
           _.get(navigation, 'state.params.activate')
-            ? <CommentsButton onPress={_.get(navigation, 'state.params.onCommentsPress')}/>
+            ? <CommentsButton onPress={_.get(navigation, 'state.params.onCommentsPress')} />
             : <WatchVideoButton />
         }
       </AppHeader>
@@ -159,6 +167,25 @@ export default class Home extends PureComponent {
     }
   }
 
+  handleCombo = async () => {
+    const combo = await AsyncStorage.getItem(storageConstants.QUESTIONS_COMBO) || '0'
+
+    const newCombo = +combo + 1
+
+    await AsyncStorage.setItem(storageConstants.QUESTIONS_COMBO, `${newCombo}`)
+
+    if ((newCombo % config.values.adInterval === 0) && this.props.videoAdId) {
+      return {
+        whatif: __t('ad_whatif'),
+        but: __t('ad_but'),
+        stats: {},
+        onPress: async () => showAd(this.props.videoAdId, { back_disabled: true }),
+      }
+    }
+
+    return null
+  }
+
   nextCard = async (questionId, accept) => {
     const {
       data: {
@@ -181,7 +208,7 @@ export default class Home extends PureComponent {
       this.refs.butCard ? this.refs.butCard.bounceOutRight() : null
     }, 300)
 
-    setTimeout(() => {
+    setTimeout(async () => {
       const finalQuestions = questions.questions.slice(1, questions.questions.length)
       setParams({
         // level: i.level,
@@ -197,6 +224,11 @@ export default class Home extends PureComponent {
               totalQuestions: i.levelQuestions,
             })
           })
+      }
+      const adQuestion = await this.handleCombo()
+
+      if (adQuestion) {
+        finalQuestions.unshift(adQuestion)
       }
       mutateStore('questions', { ...questions, questions: finalQuestions })
 
@@ -226,6 +258,12 @@ export default class Home extends PureComponent {
         accept: showingResult === 'accept',
       },
     })
+      .then(({ balance, prize }) => {
+        if (balance) {
+          store.dispatch(setToStore('balance', balance))
+          toast(__t('coin_prize', { value: prize }))
+        }
+      })
       .catch(e => {
         if (e !== 'ANSWERED_BEFORE') throw e
       })
@@ -297,7 +335,8 @@ export default class Home extends PureComponent {
         <Jext f={18} c={white}>{showingResult === 'accept' ? __t('home.accept') : __t('home.deny')}</Jext>
         {
           !!question &&
-          <Jext f={12} c={white}>{question.stats[showingResult === 'accept' ? 'yes' : 'no']}٪ مردم مثل تو فکر میکنن</Jext>
+          <Jext f={12} c={white}>{question.stats[showingResult === 'accept' ? 'yes' : 'no']}٪ مردم مثل تو فکر
+                                                                                            میکنن</Jext>
         }
       </View>
     )
@@ -377,7 +416,13 @@ export default class Home extends PureComponent {
           >
             <Button
               title={showingResult ? this.renderResultsInButton(showingResult, nextQuestion) : __t('home.accept')}
-              onPress={showingResult ? () => this.nextCard(nextQuestion ? nextQuestion.id : null) : this.handleRespond(true, nextQuestion ? nextQuestion.id : null)}
+              onPress={showingResult ? () => this.nextCard(nextQuestion ? nextQuestion.id : null) : async () => {
+                if (nextQuestion.onPress) {
+                  await nextQuestion.onPress()
+                  await this.nextCard()
+                }
+                this.handleRespond(true, nextQuestion ? nextQuestion.id : null)()
+              }}
               gradientColors={gradients.green}
               style={{
                 flex: 1,

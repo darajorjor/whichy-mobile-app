@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import Jext from 'src/common/Jext'
 import * as Animatable from 'react-native-animatable'
-import { yellow, lightGreen, black } from 'src/theme'
+import { yellow, lightGreen, white, black } from 'src/theme'
 import ColorfulItem from 'src/common/ColorfulItem'
 import backIcon from './assets/back.png'
 
@@ -52,7 +52,8 @@ export default class Store extends PureComponent {
             titleStyle={{ color: black }}
             bought
             backgroundColor={yellow}
-            onPress={() => { }}
+            onPress={() => {
+            }}
           />
           <Jext style={{ alignSelf: 'center', marginTop: 16, }}>{__t('coming_soon')}</Jext>
         </View>
@@ -79,7 +80,7 @@ export default class Store extends PureComponent {
           style={[styles.btn, { backgroundColor: lightGreen }]}
           onPress={this.handleButtonPress('colors')}
         >
-          <Jext f={20} bold>{__t('menu.other_colors')}</Jext>
+          <Jext f={20} c={white} bold>{__t('menu.other_colors')}</Jext>
         </TouchableOpacity>
       </View>
     )
@@ -87,6 +88,7 @@ export default class Store extends PureComponent {
 
   render() {
     const { open } = this.state
+    const { children } = this.props
 
     return (
       <Animatable.View
@@ -114,6 +116,8 @@ export default class Store extends PureComponent {
         </TouchableOpacity>
         <Jext f={24} bold>{this.getTitle()}</Jext>
         {this.renderContent()}
+
+        {open === 'colors' && children}
       </Animatable.View>
     )
   }

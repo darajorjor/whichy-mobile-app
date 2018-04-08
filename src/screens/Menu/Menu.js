@@ -18,12 +18,14 @@ import SafariView from 'react-native-safari-view'
 import Jext from 'src/common/Jext'
 import { connect } from 'react-redux'
 import { setToStore } from 'src/redux/Main.reducer'
-import BuyCoin from './components/BuyCoin'
 import Parallelogram from 'src/common/Parallelogram'
+import DeviceInfo from 'react-native-device-info'
+import codePush from 'react-native-code-push'
 import ProfileButton from './components/ProfileButton'
 import LoginModal from './components/LoginModal'
 import Store from './components/Store'
 import CoinsModal from './components/CoinsModal'
+import BuyCoin from './components/BuyCoin'
 
 const { width } = Dimensions.get('window')
 
@@ -61,6 +63,11 @@ export default class Menu extends PureComponent {
 
     setParams({
       onCoinsPress: () => this.setState({ coinsModalVisible: true })
+    })
+
+    codePush.getUpdateMetadata().then((metadata) => {
+      if (!metadata) return null;
+      this.setState({ label: metadata.label, version: metadata.appVersion, description: metadata.description });
     })
   }
 
@@ -154,7 +161,14 @@ export default class Menu extends PureComponent {
           </TouchableOpacity>
         </View>
 
-        <Store ref={ref => this.store = ref} />
+        <Store ref={ref => this.store = ref}>
+          <Jext c='#ddd' style={{ marginTop: 16 }}>
+            {DeviceInfo.getBuildNumber()}.
+            {this.state.label ? this.state.label.replace('v', '') : '0'}.
+            {this.state.version || '0'}.
+            {this.state.description || '0'}
+          </Jext>
+        </Store>
 
         <LoginModal
           visible={this.state.modalVisible}

@@ -87,9 +87,14 @@ let listenerSet = false
 
 export function initVideoAd() {
   return (dispatch, getState, api) => {
+    dispatch({
+      type: VIDEO_AD_EXPIRE,
+    })
     function requestAd() {
+      console.log('XXX requesting ad')
       return Tapsell.requestAd(config.adZones.video, true,
         (zoneId, adId) => {
+          console.log('XXX add received')
           dispatch({
             type: VIDEO_AD_RECEIVED,
             data: adId,
