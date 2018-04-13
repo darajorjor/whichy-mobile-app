@@ -38,9 +38,7 @@ export default class Pressable extends PureComponent {
           onPressOut={disabled ? null : this.handlePressOut}
           onPress={disabled ? null : onPress}
           {...otherProps}
-          style={[
-            { flex: 1, },
-          ]}
+          style={{ flex: 1, }}
         >
           {children}
         </TouchableOpacity>

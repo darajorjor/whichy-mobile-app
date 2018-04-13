@@ -25,7 +25,7 @@ const Button = ({ style, title, titleStyle, onPress, disabled, gradientColors })
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
