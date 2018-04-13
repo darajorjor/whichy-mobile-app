@@ -24,6 +24,7 @@ import homeService from './Home.service'
 import WatchVideoButton from './components/WatchVideoButton'
 import CommentsButton from './components/CommentsButton'
 import CommentsModal from './components/CommentsModal'
+import ShareModal from './components/ShareModal'
 import { connect } from 'react-redux'
 import { showAd } from 'src/utils/ad'
 import config from 'src/config'
@@ -103,6 +104,7 @@ export default class Home extends PureComponent {
      * */
     showingResult: false,
     commentsModalVisible: false,
+    shareModalVisible: false,
   }
 
   componentWillMount() {
@@ -324,13 +326,17 @@ export default class Home extends PureComponent {
     const { data: { questions } } = this.props
     const nextQuestion = questions ? questions.questions[0] : null
 
+    this.setState({
+      shareModalVisible: true
+    })
+
     if (!nextQuestion) return null
 
-    return Share.share({
-      message: `تصور کن اگه ${nextQuestion.whatif} اما ${nextQuestion.but}`,
-      url: `http://whichy.club`,
-      title: `تصور کن اگه ${nextQuestion.whatif}`,
-    })
+    // return Share.share({
+    //   message: `تصور کن اگه ${nextQuestion.whatif} اما ${nextQuestion.but}`,
+    //   url: `http://whichy.club`,
+    //   title: `تصور کن اگه ${nextQuestion.whatif}`,
+    // })
   }
 
   renderResultsInButton(showingResult, question) {
@@ -444,6 +450,10 @@ export default class Home extends PureComponent {
         <CommentsModal
           visible={this.state.commentsModalVisible}
           onRequestClose={() => this.setState({ commentsModalVisible: false })}
+        />
+        <ShareModal
+          visible={this.state.shareModalVisible}
+          onRequestClose={() => this.setState({ shareModalVisible: false })}
         />
       </View>
     )

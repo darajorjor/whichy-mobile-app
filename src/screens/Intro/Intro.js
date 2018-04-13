@@ -3,38 +3,49 @@ import { View, StyleSheet, StatusBar } from 'react-native'
 import AppIntroSlider from 'react-native-app-intro-slider'
 import { setToStore } from 'src/redux/Main.reducer'
 import { connect } from 'react-redux'
+import { translate } from 'src/utils/i18n'
+
+global.__t = translate
 
 const styles = StyleSheet.create({
   image: {
-    width: 320,
-    height: 320,
+    width: 160,
+    height: 160,
   }
 })
 
 const slides = [
   {
-    key: 'somethun',
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
-    image: require('./assets/1.jpg'),
+    key: 'fun',
+    title: __t('intro.page1.title'),
+    text: __t('intro.page1.text'),
+    image: require('./assets/1.png'),
     imageStyle: styles.image,
-    backgroundColor: '#59b2ab',
+    backgroundColor: '#e58c04',
   },
   {
-    key: 'somethun-dos',
-    title: 'Title 2',
-    text: 'Other cool stuff',
-    image: require('./assets/2.jpg'),
+    key: 'share',
+    title: __t('intro.page2.title'),
+    text: __t('intro.page2.text'),
+    image: require('./assets/2.png'),
     imageStyle: styles.image,
-    backgroundColor: '#febe29',
+    backgroundColor: '#5aa8d7',
   },
   {
-    key: 'somethun1',
-    title: 'Rocket guy',
-    text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
-    image: require('./assets/3.jpg'),
+    key: 'ask',
+    title: __t('intro.page3.title'),
+    text: __t('intro.page3.text'),
+    image: require('./assets/3.png'),
     imageStyle: styles.image,
-    backgroundColor: '#22bcb5',
+    backgroundColor: '#aa2656',
+  },
+  {
+    key: 'beta',
+    title: __t('intro.page4.title'),
+    text: __t('intro.page4.text'),
+    image: require('./assets/4.png'),
+    imageStyle: styles.image,
+    backgroundColor: '#6aa743',
   }
 ]
 

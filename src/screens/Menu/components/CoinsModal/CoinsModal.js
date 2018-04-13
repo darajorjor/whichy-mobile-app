@@ -93,7 +93,7 @@ export default class CoinsModal extends PureComponent {
     </ScrollView>,
     second: () => <ScrollView tabLabel='خرید سکه'>
       <ColorfulItem
-        title={__t('coins_modal.buy_100')}
+        title={__t('coins_modal.buy_200')}
         price={200}
         backgroundColor={blue}
         onPress={() => this.props.onCoinPurchase(200)}

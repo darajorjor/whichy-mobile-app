@@ -3,9 +3,9 @@ module.exports = {
   white: '#fff',
   orange: '#F5A623',
   yellow: '#F8E71C',
-  green: '#83e31f',
-  darkenedGreen: '#83e31f',
-  lightGreen: '#83e31f',
+  green: '#31ca17',
+  darkenedGreen: '#31ca17',
+  lightGreen: '#31ca17',
   gradients: {
     green: ['#31ca17', '#31CA17'],
     red: ['#f1283f', '#F1283F'],

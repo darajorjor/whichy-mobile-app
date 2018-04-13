@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import config from 'src/config'
 import _ from 'lodash'
-import { orange, white, green, yellow } from 'src/theme'
+import { orange, white, green, yellow, purple } from 'src/theme'
 import AppHeader from 'src/common/AppHeader'
 import Qs from 'qs'
 import storageConstants from 'src/constants/storage.constant'
@@ -23,7 +23,7 @@ import DeviceInfo from 'react-native-device-info'
 import codePush from 'react-native-code-push'
 import cafeBazaar from 'src/utils/cafe-bazaar'
 
-import ProfileButton from './components/ProfileButton'
+// import ProfileButton from './components/ProfileButton'
 import LoginModal from './components/LoginModal'
 import Store from './components/Store'
 import CoinsModal from './components/CoinsModal'
@@ -152,10 +152,24 @@ export default class Menu extends PureComponent {
               height: 40,
             }}
           />
-          <ProfileButton
+          <Parallelogram
+            onPress={() => Linking.openURL('https://t.me/whichysupport1')}
+            label={__t('menu.feedback')}
+            labelStyle={{
+              color: white,
+              fontSize: 18,
+            }}
+            style={{
+              backgroundColor: purple,
+              width: 130,
+              padding: 5,
+              height: 40,
+            }}
+          />
+          {/*<ProfileButton
             onPress={() => this.setState({ modalVisible: true })}
             disabled
-          />
+          />*/}
         </View>
 
         <View style={[styles.activeGameCard, styles.boxShadow]}>

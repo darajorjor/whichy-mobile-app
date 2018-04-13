@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native'
+import config from 'src/config'
 import { yellow } from 'src/theme'
 import Pressable from 'src/common/Pressable'
 import Jext from 'src/common/Jext'
@@ -15,10 +16,6 @@ import { connect } from 'react-redux'
 import { showAd } from 'src/utils/ad'
 
 const { width } = Dimensions.get('window')
-
-const options = {
-  coins: 5,
-}
 
 @connect(
   state => ({
@@ -41,7 +38,7 @@ export default class WatchVideoButton extends PureComponent {
      <Animatable.View animation='slideInRight' duration={400}>
        <Pressable onPress={this.onPress} style={styles.wrapper} transforms={[{ skewX: '-10deg' }]}>
          <View style={styles.innerWrapper}>
-           <Jext f={width < 400 ? 12 : 14} bold>{__t('watch_video')} +{options.coins}</Jext>
+           <Jext f={width < 400 ? 12 : 14} bold>{__t('watch_video')} +{config.values.videoPrize}</Jext>
            <Image
              source={coin}
              style={{
