@@ -1,4 +1,8 @@
 rootProject.name = 'whatif'
+include ':react-native-config'
+project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
+include ':react-native-cafe-bazaar', ':app'
+project(':react-native-cafe-bazaar').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cafe-bazaar/android/app')
 include ':react-native-fabric'
 project(':react-native-fabric').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fabric/android')
 include ':react-native-onesignal'

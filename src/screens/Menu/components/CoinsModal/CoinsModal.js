@@ -4,7 +4,6 @@ import {
   Modal,
   StyleSheet,
   ScrollView,
-  TextInput,
   Dimensions,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -12,12 +11,9 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native'
-import { grey, white, lightGreen, blue, darkGreen, darkRed, purple } from 'src/theme'
+import { white, blue, darkGreen, darkRed, purple } from 'src/theme'
 import Jext from 'src/common/Jext'
-import Button from 'src/common/Button'
-import ScrollableTabView, { DefaultTabBar, } from 'react-native-scrollable-tab-view'
 import ColorfulItem from 'src/common/ColorfulItem'
-// import Tapsell, { ROTATION_LOCKED_PORTRAIT } from 'react-native-tapsell'
 import { connect } from 'react-redux'
 import { TabViewAnimated, TabBar, SceneMap, TabViewPagerScroll, TabViewPagerPan } from 'react-native-tab-view'
 import { showAd } from 'src/utils/ad'
@@ -98,9 +94,9 @@ export default class CoinsModal extends PureComponent {
     second: () => <ScrollView tabLabel='خرید سکه'>
       <ColorfulItem
         title={__t('coins_modal.buy_100')}
-        price={100}
+        price={200}
         backgroundColor={blue}
-        onPress={() => this.props.onCoinPurchase(100)}
+        onPress={() => this.props.onCoinPurchase(200)}
       />
       <ColorfulItem
         title={__t('coins_modal.buy_500')}

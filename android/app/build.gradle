@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -124,6 +125,7 @@ android {
         }
         manifestPlaceholders = [onesignal_app_id               : "40384a2b-3fc7-4b57-ac70-9941fe7f15b0",
                                 onesignal_google_project_number: "47146691342"]
+        resValue "string", "build_config_package", "com.whatif"
     }
     signingConfigs {
         release {
@@ -186,6 +188,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-config')
+    compile project(':react-native-cafe-bazaar')
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }

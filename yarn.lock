@@ -3955,6 +3955,10 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-cafe-bazaar@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-cafe-bazaar/-/react-native-cafe-bazaar-1.0.3.tgz#a4a80f276f99680c0aea8c4c4a09ebc92c97f905"
+
 react-native-code-push@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/react-native-code-push/-/react-native-code-push-5.3.2.tgz#32bc019b37ab14c0c1065ac967b5913e1598dca4"
@@ -3965,6 +3969,10 @@ react-native-code-push@^5.3.2:
     inquirer "1.1.2"
     plist "1.2.0"
     xcode "0.9.2"
+
+react-native-config@^0.11.5:
+  version "0.11.5"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.5.tgz#516cb7b6ec437c7739236ca075971db3aabdcb95"
 
 react-native-device-info@^0.17.3:
   version "0.17.3"

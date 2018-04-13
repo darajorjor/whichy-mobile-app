@@ -21,6 +21,8 @@ import { setToStore } from 'src/redux/Main.reducer'
 import Parallelogram from 'src/common/Parallelogram'
 import DeviceInfo from 'react-native-device-info'
 import codePush from 'react-native-code-push'
+import cafeBazaar from 'src/utils/cafe-bazaar'
+
 import ProfileButton from './components/ProfileButton'
 import LoginModal from './components/LoginModal'
 import Store from './components/Store'
@@ -103,11 +105,16 @@ export default class Menu extends PureComponent {
   handleLogin = () => this.handleOpenWebView(`${config.api}/users/login-google`)
   handlePurchaseItem = (coinCount) => {
     this.setState({ coinsModalVisible: false })
-    AsyncStorage.getItem(storageConstants.SESSION)
-      .then((session) => this.handleOpenWebView(`${config.api}/accounting/purchase-coin?${Qs.stringify({
-        session,
-        coinCount,
-      })}`))
+
+    if (Platform.OS === 'android' && config.isCafeBazaarBuild) {
+      cafeBazaar.purchase(`coin-${coinCount}`)
+    } else {
+      AsyncStorage.getItem(storageConstants.SESSION)
+        .then((session) => this.handleOpenWebView(`${config.api}/accounting/purchase-coin?${Qs.stringify({
+          session,
+          coinCount,
+        })}`))
+    }
   }
 
   handleOpenWebView = (url) => {

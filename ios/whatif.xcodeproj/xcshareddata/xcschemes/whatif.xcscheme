@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "whatif.app"
+               BuildableName = "Whichy.app"
                BlueprintName = "whatif"
                ReferencedContainer = "container:whatif.xcodeproj">
             </BuildableReference>
@@ -72,7 +72,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "whatif.app"
+            BuildableName = "Whichy.app"
             BlueprintName = "whatif"
             ReferencedContainer = "container:whatif.xcodeproj">
          </BuildableReference>
@@ -81,7 +81,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       language = ""
@@ -96,7 +96,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "whatif.app"
+            BuildableName = "Whichy.app"
             BlueprintName = "whatif"
             ReferencedContainer = "container:whatif.xcodeproj">
          </BuildableReference>
@@ -115,7 +115,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "whatif.app"
+            BuildableName = "Whichy.app"
             BlueprintName = "whatif"
             ReferencedContainer = "container:whatif.xcodeproj">
          </BuildableReference>

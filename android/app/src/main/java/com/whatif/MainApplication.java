@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.smixx.fabric.FabricPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.microsoft.codepush.react.CodePush;
@@ -16,6 +17,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.contoriel.cafebazaar.CafeBazaarPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,13 +39,15 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new ReactNativeConfigPackage(),
             new FabricPackage(),
             new ReactNativeOneSignalPackage(),
             new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG),
                     new TapsellReactNativePackage(),
                     new RNDeviceInfo(),
                     new LinearGradientPackage(),
-                    new RNI18nPackage()
+                    new RNI18nPackage(),
+                    new CafeBazaarPackage()
             );
         }
 

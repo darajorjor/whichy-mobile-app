@@ -1,4 +1,5 @@
 <resources>
     <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey"></string>
-    <string name="app_name">Whichy?!</string>
+    <string name="app_name">ویچی</string>
+    <string name="CAFE_BAZAAR_PUBLIC_KEY">MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwDEYZcIjwpZCTlj/1XrCPElfg8kGYcDnc30rAPBWO1qVw/IF09XEJi0wlGBYpYchdSkrg52c9ojjbObbh8DMDO7LSvg1BFVo2dRhqQKs+ldfdKttL9hOjzQXpP27UdWvyvEqd48dIUDB/I6TKqgYNpAmCv+l8NtKMX3+TVy8Lj9h7Eb5M+of7Fh7efGmxRPtMpSat8OEICwHHUAOr4kDelwFhDhmxtzTZIxRHR0UpUCAwEAAQ==</string>
 </resources>

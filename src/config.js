@@ -1,5 +1,7 @@
+import ENV from 'react-native-config'
+
 export default {
-  api: 'http://78.46.245.120:4040/v1',
+  api: 'http://localhost:4040/v1',
   tapsellKey: 'errcgodtaagspphnnohgfhosoagspflpbsjnqikopottrmnjtmjcqdgnaipiibbdtokcik',
   adZones: {
     default: '5aaed4026d106d000183089d',
@@ -11,4 +13,5 @@ export default {
     newWhichPrice: 0,
     adInterval: 15,
   },
+  isCafeBazaarBuild: ENV.CAFE_BAZAAR_BUILD === 'TRUE',
 }
