@@ -3955,6 +3955,10 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-app-intro-slider@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-app-intro-slider/-/react-native-app-intro-slider-0.2.4.tgz#e85e5aab826fd6c131f197ab7878d6686e7b468f"
+
 react-native-cafe-bazaar@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-cafe-bazaar/-/react-native-cafe-bazaar-1.0.3.tgz#a4a80f276f99680c0aea8c4c4a09ebc92c97f905"

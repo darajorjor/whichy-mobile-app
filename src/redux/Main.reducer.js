@@ -20,6 +20,7 @@ const initialState = {
   session: null,
   videoAdId: null,
   balance: null,
+  firstLogin: true,
 }
 
 export default function reducer(state = initialState, action) {

@@ -64,6 +64,7 @@ const { width } = Dimensions.get('window')
 @connect(
   state => ({
     videoAdId: state.Main.videoAdId,
+    firstLogin: state.Main.firstLogin,
   })
 )
 export default class Home extends PureComponent {
@@ -102,6 +103,14 @@ export default class Home extends PureComponent {
      * */
     showingResult: false,
     commentsModalVisible: false,
+  }
+
+  componentWillMount() {
+    const { firstLogin, navigation: { replace } } = this.props
+
+    if (firstLogin) {
+      replace('Intro')
+    }
   }
 
   async componentDidMount() {

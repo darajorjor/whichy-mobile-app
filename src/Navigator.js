@@ -3,6 +3,7 @@ import { Dimensions, Platform } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import Home from 'src/screens/Home'
 import Menu from 'src/screens/Menu'
+import Intro from 'src/screens/Intro'
 import NewWhich from 'src/screens/NewWhich'
 import AppHeader from 'src/common/AppHeader'
 import { orange } from 'src/theme'
@@ -10,6 +11,7 @@ import { orange } from 'src/theme'
 const { width } = Dimensions.get('window')
 
 const MainNavigator = StackNavigator({
+  Intro,
   Home,
   Menu: {
     screen: Menu,

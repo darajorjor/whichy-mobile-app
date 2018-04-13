@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './src/App';
+import AppWrapper from './src/AppWrapper';
 
-AppRegistry.registerComponent('whatif', () => App);
+AppRegistry.registerComponent('whatif', () => AppWrapper);
