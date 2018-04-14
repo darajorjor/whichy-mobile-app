@@ -4,6 +4,7 @@ import AppIntroSlider from 'react-native-app-intro-slider'
 import { setToStore } from 'src/redux/Main.reducer'
 import { connect } from 'react-redux'
 import { translate } from 'src/utils/i18n'
+import Jext from 'src/common/Jext'
 
 global.__t = translate
 
@@ -11,13 +12,19 @@ const styles = StyleSheet.create({
   image: {
     width: 160,
     height: 160,
-  }
+  },
+  text: {
+    fontFamily: 'IRANYekanFaNum',
+    textAlign: 'center',
+  },
 })
 
 const slides = [
   {
     key: 'fun',
     title: __t('intro.page1.title'),
+    titleStyle: styles.text,
+    textStyle: styles.text,
     text: __t('intro.page1.text'),
     image: require('./assets/1.png'),
     imageStyle: styles.image,
@@ -26,6 +33,8 @@ const slides = [
   {
     key: 'share',
     title: __t('intro.page2.title'),
+    titleStyle: styles.text,
+    textStyle: styles.text,
     text: __t('intro.page2.text'),
     image: require('./assets/2.png'),
     imageStyle: styles.image,
@@ -34,6 +43,8 @@ const slides = [
   {
     key: 'ask',
     title: __t('intro.page3.title'),
+    titleStyle: styles.text,
+    textStyle: styles.text,
     text: __t('intro.page3.text'),
     image: require('./assets/3.png'),
     imageStyle: styles.image,
@@ -42,6 +53,8 @@ const slides = [
   {
     key: 'beta',
     title: __t('intro.page4.title'),
+    titleStyle: styles.text,
+    textStyle: styles.text,
     text: __t('intro.page4.text'),
     image: require('./assets/4.png'),
     imageStyle: styles.image,
@@ -65,6 +78,11 @@ export default class Intro extends Component {
     setToStore('firstLogin', false)
   }
 
+  renderSkipButton = () => <Jext f={18} c='#fff'>{ __t('intro.skip') }</Jext>
+  renderDoneButton = () => <Jext f={18} c='#fff'>{ __t('intro.done') }</Jext>
+  renderNextButton = () => <Jext f={18} c='#fff'>{ __t('intro.next') }</Jext>
+  renderPrevButton = () => <Jext f={14} c='#fff'>{ __t('intro.back') }</Jext>
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -75,7 +93,14 @@ export default class Intro extends Component {
           doneLabel='اوکی'
           nextLabel='خب'
           slides={slides}
+          showSkipButton
+          showPrevButton
           onDone={this.handleDone}
+          onSkip={this.handleDone}
+          renderSkipButton={this.renderSkipButton}
+          renderPrevButton={this.renderPrevButton}
+          renderNextButton={this.renderNextButton}
+          renderDoneButton={this.renderDoneButton}
         />
       </View>
     )

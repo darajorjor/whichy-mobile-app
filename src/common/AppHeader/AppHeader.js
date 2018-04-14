@@ -72,7 +72,7 @@ const AppHeader = ({ style, coins, rate, children, navigation, onLike, onDislike
       />*/}
       {
         rate
-          ? <Ratingٓ
+          ? <Rating
             onLike={onLike}
             onDislike={onDislike}
           />
