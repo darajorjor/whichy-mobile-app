@@ -66,10 +66,10 @@ const AppHeader = ({ style, coins, rate, children, navigation, onLike, onDislike
 
   return (
     <SafeAreaView style={[styles.wrapper, style]}>
-      {/*<Hamburger
+      <Hamburger
         onPress={() => active ? navigation.pop() : navigation.navigate('Menu')}
         active={active}
-      />*/}
+      />
       {
         rate
           ? <Rating
