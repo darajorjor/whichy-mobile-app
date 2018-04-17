@@ -16,7 +16,7 @@ const ColorfulItem = ({ style, title, titleStyle, price, backgroundColor, onPres
   <TouchableOpacity
     style={[{ backgroundColor: disabled ? '#ddd' : backgroundColor }, styles.wrapper, style]}
     activeOpacity={disabled ? 1 : 0.7}
-    onPress={onPress}
+    onPress={disabled ? null : onPress}
   >
     <Jext bold c={white} style={[{ top: -3 }, titleStyle]}>{title}</Jext>
     <View style={styles.square}>

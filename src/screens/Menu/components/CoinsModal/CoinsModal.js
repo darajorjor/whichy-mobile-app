@@ -17,6 +17,7 @@ import ColorfulItem from 'src/common/ColorfulItem'
 import { connect } from 'react-redux'
 import { TabViewAnimated, TabBar, SceneMap, TabViewPagerScroll, TabViewPagerPan } from 'react-native-tab-view'
 import { showAd } from 'src/utils/ad'
+import config from 'src/config'
 
 const { width, height } = Dimensions.get('window')
 
@@ -97,24 +98,28 @@ export default class CoinsModal extends PureComponent {
         price={200}
         backgroundColor={blue}
         onPress={() => this.props.onCoinPurchase(200)}
+        disabled={Platform.OS === 'android' && config.isCafeBazaarBuild}
       />
       <ColorfulItem
         title={__t('coins_modal.buy_500')}
         price={500}
         backgroundColor={darkGreen}
         onPress={() => this.props.onCoinPurchase(500)}
+        disabled={Platform.OS === 'android' && config.isCafeBazaarBuild}
       />
       <ColorfulItem
         title={__t('coins_modal.buy_1000')}
         price={1000}
         backgroundColor={purple}
         onPress={() => this.props.onCoinPurchase(1000)}
+        disabled={Platform.OS === 'android' && config.isCafeBazaarBuild}
       />
       <ColorfulItem
         title={__t('coins_modal.buy_10000')}
         price={10000}
         backgroundColor={darkRed}
         onPress={() => this.props.onCoinPurchase(10000)}
+        disabled={Platform.OS === 'android' && config.isCafeBazaarBuild}
       />
     </ScrollView>,
   })
